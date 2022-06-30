@@ -4,18 +4,18 @@ public class U1_CharacterInAString {
     public static void main(String[]args){
         boolean toContinue = true;
 
-        while (toContinue) {
+        while (toContinue) { //at the end of the loop it asks the user if they want to go again or not
             String sentence = requestSentence();
             String letterToSearch = requestLetter();
 
             int timesIn = timesCounter(sentence, letterToSearch);
-            String answer = picAnswer(timesIn);
+            String answer = pickAnswer(timesIn);
             System.out.println(answer);
             toContinue=continueQuestion();
         }
-        System.out.println("Okay, bye then. Take care!");
+        System.out.println("Okay, bye then. Take care!"); //Exit message
     }
-    public static String picAnswer(int letterInSentenceTimes){
+    static String pickAnswer(int letterInSentenceTimes){ //The message displayed for the user will depend on whether the letter appears or not in the text.*/
         String answer;
         if (letterInSentenceTimes == 0) {
             answer = "That letter isn't in your sentence.";
@@ -26,10 +26,10 @@ public class U1_CharacterInAString {
         return answer;
     }
 
-    public static String requestSentence(){ //FIX IF IT BREAKS WITH COMAS OR POINTS
+    static String requestSentence(){ //Asks the user to type in a sentence or paragraph to evaluate.
         Scanner sentenceScan = new Scanner(System.in);
         String sentence;
-        System.out.println("Hello, what sentence or paragraph text do you want to evaluate? Press 'enter' when done typing.");
+        System.out.println("Hello, what sentence or paragraph do you want to evaluate? Press 'enter' when done typing.");
 
         try {
             sentence = sentenceScan.nextLine();
@@ -42,7 +42,7 @@ public class U1_CharacterInAString {
             return sentence1;
         }
     }
-    public static String requestLetter(){
+    static String requestLetter(){ //Asks the user to type in a letter to look for in the text.
         Scanner letterScan =new Scanner(System.in);
         String letter;
         System.out.println("Good! Now, what character do you want to check for in this sentence?");
@@ -58,7 +58,7 @@ public class U1_CharacterInAString {
             return letter1;
         }
     }
-    public static int timesCounter(String text, String letterToSearch){
+    static int timesCounter(String text, String letterToSearch){ //looks for the letter to search through each letter of the sentence.
             int counter = 0;
 
         for (int i = 0; i <= text.length()-1; i++){
@@ -69,7 +69,7 @@ public class U1_CharacterInAString {
         }
         return counter;
     }
-    public static boolean continueQuestion(){
+    static boolean continueQuestion(){ //asks the user if they want to continue.
                 char answer = 0;
         boolean validInput = false;
 
