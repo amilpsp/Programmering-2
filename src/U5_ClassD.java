@@ -1,8 +1,8 @@
-public class ClassD {
+public class U5_ClassD {
 
     private int x, y, z;
 
-    public ClassD(int x, int y, int z) {
+    public U5_ClassD(int x, int y, int z) {
 //In main the object constructed uses de values 1, 2 and 3.
         this.x = x;     //1
         this.y = y;     //2
