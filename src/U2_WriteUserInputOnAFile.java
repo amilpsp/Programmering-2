@@ -1,43 +1,58 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
+import java.io.*;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class U2_WriteUserInputOnAFile {
 
-    public static void main(String[]args) {
+    public static void main(String[]args) throws IOException {
+
         boolean validInput = true;
-        String fileName = "User_Input.txt";
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println(
+                """
+                Hello, what do you want the name of your file to be?
+                Please end it with '.txt'
+                Note that if you repeat a previous file name, it will get overwritten""");
+        String fileName = scan.nextLine();
+
+        File path = new File(fileName);
+        FileWriter wr = new FileWriter(path);
+
         System.out.println("""
-                Hello, here you can type anything you want to store to your text file.
+                You can type anything you want to store to your text file.
                 Press 'enter' when done typing each segment.
                 To close the program, just press 'enter' on an empty line.
                 """);
 
-        while (validInput){
-            String sentence = fetchSentence();
-            saveToFile(fileName, sentence);
+        while (validInput) {
+
+            var input = new BufferedReader(
+                    new InputStreamReader(System.in)
+            );
+            String sentence = input.readLine();
+
+
             if (Objects.equals(sentence, "")) {
-                System.out.println("""
-                        Are you sure you want to exit?
-                        Confirm with another empty line""");
-                String confirmationSentence = fetchSentence();
-                if (Objects.equals(confirmationSentence, "")) {
-                    System.out.println("Bye, have a good one!");
-                    validInput = false;
-                }
+                validInput = false;
+                System.out.println("Bye bye!");
+            } else {
+                wr.write("""
+                                                
+                        - """ + sentence);
             }
         }
-
+        wr.close();
     }//END OF MAIN
-
+/*
     public static String fetchSentence() { //Asks the user to type in a sentence or paragraph.
-        Scanner sentenceScan = new Scanner(System.in);
+        var input= new BufferedReader(
+                new InputStreamReader(System.in)
+        );
         String sentence;
 
         try {
-            sentence = sentenceScan.nextLine();
+            sentence = input.readLine();
             return sentence;
         } catch (Exception e) {
             String sentence1;
@@ -49,13 +64,15 @@ public class U2_WriteUserInputOnAFile {
 
     static void saveToFile(String fileName,String userInput){
             try {
-                var writer = new FileWriter(fileName);
-                writer.write(userInput);
-                writer.close();
+                var output = new PrintWriter
+                        (new BufferedWriter
+                        (new FileWriter(fileName)));
+                output.println(userInput);
+                output.close();
 
             } catch (FileNotFoundException fex) {
-                var file = new File(fileName);
                 try {
+                    var file = new File(fileName);
                     file.createNewFile();
                     saveToFile(fileName, userInput);
                 } catch (Exception e) {
@@ -67,5 +84,5 @@ public class U2_WriteUserInputOnAFile {
 
             }
         }
-
+*/
 }
