@@ -1,9 +1,8 @@
 import java.util.*;
 public class PokerDeck {
     static class Deck extends PokerDeck {
-        List<Card> AllCards = new ArrayList<>();
-
-    //For simplicity's sake I'm just going to have one deck (only 52 cards)
+        static List<Card> allCardsArrayList = new ArrayList<>();
+        static Queue<PokerDeck.Card> allCardsQueue = new LinkedList<>(Arrays.asList(allCardsArrayList.toArray(new PokerDeck.Card[52])));
         private final int amountOfCards = 52;
 
         public ArrayList<Card> generateCards(){
@@ -12,14 +11,14 @@ public class PokerDeck {
             for(int s=0; s < 4; s++){
                 //for each card
                 for (int n=2; n<=14; n++ ){
-                    AllCards.add(new Card(Color.values()[s],n));
+                    allCardsArrayList.add(new Card(Color.values()[s],n));
                 }
             }
-            return (ArrayList<Card>) AllCards;
+            return (ArrayList<Card>) allCardsArrayList;
         }
 
         public void shuffleDeck(){
-            Collections.shuffle(this.AllCards);
+            Collections.shuffle(this.allCardsArrayList);
         }
 
     }
