@@ -2,7 +2,6 @@ import java.util.*;
 public class PokerDeck {
     static class Deck extends PokerDeck {
         static List<Card> allCardsArrayList = new ArrayList<>();
-        static Queue<PokerDeck.Card> allCardsQueue = new LinkedList<>(Arrays.asList(allCardsArrayList.toArray(new PokerDeck.Card[52])));
         private final int amountOfCards = 52;
 
         public ArrayList<Card> generateCards(){
