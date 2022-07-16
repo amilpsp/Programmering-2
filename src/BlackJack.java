@@ -16,7 +16,7 @@ public class BlackJack {
         Player.Computer computer = new Player.Computer();
 
 
-        while (continuing){
+        while (continuing){ //whole program play again loop
 
 
 
@@ -24,7 +24,7 @@ public class BlackJack {
             System.out.println(Player.drawCard(allCardsQueue));
 
             continuing = Player.User.yesOrNoQuestion("Do you want to play again?");
-        }//while loop
+        }//whole program play again loop
     }//main
 
 
@@ -35,15 +35,13 @@ public class BlackJack {
     static int decideTurn(){
         int turn;
         if (Player.User.yetToPlay){
-            turn=1;
-        }
-        else-if(Player.Computer.yetToPlay){
-            turn=2;
+            return 1;
         }
         else{
-            turn=3;
+            if (Player.Computer.yetToPlay)return 2;
+            else return 3;
         }
-    return turn;
+
     }
 }
 
