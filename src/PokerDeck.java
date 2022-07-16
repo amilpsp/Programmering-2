@@ -16,7 +16,8 @@ public class PokerDeck {
             return (ArrayList<Card>) allCardsArrayList;
         }
 
-        public void shuffleDeck(){
+        public void generateAndShuffleDeck(){
+            generateCards();
             Collections.shuffle(this.allCardsArrayList);
         }
 
