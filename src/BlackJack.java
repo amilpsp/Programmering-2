@@ -18,10 +18,32 @@ public class BlackJack {
 
         while (continuing){ //whole program play again loop
 
+            switch(decideTurn()){
+                case 1:
+                    boolean drawAnother=true;
+                    int score;
+                    while(drawAnother) {
+                        PokerDeck.Card cardDrawn =Player.User.drawCard(allCardsQueue);
+                        user.playersHand.add(cardDrawn.toString());
+                        user.score += cardDrawn.getCardsValue();
+                        if (user.score>=21 && user.playersHand.contains("Ace")){
+                            user.score -= 13;
+                        }
+
+//-------------------------------------aquí me quedé, coñoelamadre--------------------------------------------
+
+                    }
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+            }
 
 
 
-            System.out.println(Player.drawCard(allCardsQueue));
+
+            System.out.println();
 
             continuing = Player.User.yesOrNoQuestion("Do you want to play again?");
         }//whole program play again loop
@@ -32,8 +54,9 @@ public class BlackJack {
         Queue<PokerDeck.Card> allCards = new LinkedList<>(Arrays.asList(myDeck.allCardsArrayList.toArray(new PokerDeck.Card[52])));
         return allCards;
     }
+
     static int decideTurn(){
-        int turn;
+
         if (Player.User.yetToPlay){
             return 1;
         }
@@ -43,18 +66,23 @@ public class BlackJack {
         }
 
     }
+
 }
 
 class Player{
     static int score;
     static boolean yetToPlay = false;
 
-    static Queue<PokerDeck.Card> drawCard(Queue<PokerDeck.Card> allCardsQueue){
+    static PokerDeck.Card drawCard(Queue<PokerDeck.Card> allCardsQueue){
         PokerDeck.Card cardDrawn = allCardsQueue.remove(); //drawing a card
         System.out.println(cardDrawn);
-        return allCardsQueue;
+        return cardDrawn;
     }
-    static class User extends Player{
+
+     static class User extends Player{
+         static int score;
+         static boolean yetToPlay = false;
+         static LinkedList<String> playersHand = new LinkedList<>();
         static boolean yesOrNoQuestion(String question){ //asks the user if they want to continue.
             char answer = 0;
             boolean validInput = false;
@@ -82,9 +110,14 @@ class Player{
             }
             return answer != 'N';
         }
+        static List<String> getPlayersHand(){
+             return playersHand;
+         }
     }
 
     static class Computer extends Player{
+        static int score;
+        static boolean yetToPlay = false;
         static boolean drawAnotherDecision(int userScore){
             boolean drawAnother = false;
             if (Computer.score < userScore && Computer.score < 21){
