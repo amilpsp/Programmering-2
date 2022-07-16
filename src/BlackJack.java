@@ -21,18 +21,21 @@ public class BlackJack {
             switch(decideTurn()){
                 case 1:
                     boolean drawAnother=true;
-                    int score;
+                    boolean drewAce=false;
+
                     while(drawAnother) {
                         PokerDeck.Card cardDrawn =Player.User.drawCard(allCardsQueue);
-                        user.playersHand.add(cardDrawn.toString());
+                        if (cardDrawn.toString().contains("Ace"))
+                            drewAce=true;
                         user.score += cardDrawn.getCardsValue();
-                        if (user.score>=21 && user.playersHand.contains("Ace")){
+                        if (user.score>=21 && drewAce==true){
                             user.score -= 13;
+
                         }
 
-//-------------------------------------aquí me quedé, coñoelamadre--------------------------------------------
-
+                        drawAnother = Player.User.yesOrNoQuestion("Do you want to draw another card from the deck?");
                     }
+                    Player.User.yetToPlay=false;
                     break;
                 case 2:
                     break;
