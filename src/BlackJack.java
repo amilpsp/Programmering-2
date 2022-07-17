@@ -41,7 +41,8 @@ public class BlackJack {
                             if (cardDrawn.toString().contains("Ace")) {
                                 drewAce = true;
                                 System.out.println(
-                                    "You drew a " + cardDrawn + ", worth either" + cardDrawn.getCardsValue()+" points, or one point /n I'll assign it the first value and discount the remainder in case you go over 21."
+                                    "You drew a " + cardDrawn + ", worth either" + cardDrawn.getCardsValue()+" points, or one point." +
+                                            "\n I'll assign it the first value and discount the remainder in case you go over 21."
                                 );
                             }
                             System.out.println("You drew a " + cardDrawn + ", worth " + cardDrawn.getCardsValue()+" points.");
@@ -112,7 +113,10 @@ public class BlackJack {
             decideAndDisplayWinner(Player.User.score, Player.Computer.score);
 
             keepPlaying = Player.User.yesOrNoQuestion("Do you want to play again?");
+            if (!keepPlaying)
+                keepPlaying= Player.User.yesOrNoQuestion("Are you sure you want to exit the game?");
         }//whole program play again loop
+        System.out.println("Okay, thanks for playing! See ya next time (^u^)/ ");
     }//main
 
     /*
