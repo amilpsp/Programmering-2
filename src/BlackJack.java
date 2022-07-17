@@ -4,51 +4,65 @@ public class BlackJack {
     public static void main (String[]args){
         boolean keepPlaying = true;
 
+        //Making cards and shuffling the deck
+        new PokerDeck();
+        PokerDeck.Deck myDeck = new PokerDeck.Deck();
+        //Note to self:                                 REMEMBER TO CHECK WHEN THIS IS NEEDED AGAIN.
+        myDeck.generateAndShuffleDeck();
+        Queue<PokerDeck.Card> allCardsQueue = arrayListToQueue(myDeck);
+
         while (keepPlaying){ //whole program play again loop
             boolean keepDealingCards = true;
-            boolean userWon=false;
-            boolean computerWon=false;
+            boolean userWon          = false;
+            boolean computerWon      = false;
 
-            //Making cards and shuffling the deck
-            new PokerDeck();
-            PokerDeck.Deck myDeck = new PokerDeck.Deck();
-            //REMEMBER TO ALWAYS CHECK WHEN THIS IS NEEDED AGAIN.
-            myDeck.generateAndShuffleDeck();
-            Queue<PokerDeck.Card> allCardsQueue = arrayListToQueue(myDeck);
 
             //Instantiating players that are going to participate.
             new Player.User();
             new Player.Computer();
-            Player.User.score=0;
-            Player.Computer.score=0;
+            Player.User.score       =0;
+            Player.Computer.score   =0;
 
             while (keepDealingCards) {
                 switch (decideTurn()) {
 
                     case 1:  //USER'S TURN---------------------
                         boolean drawAnother = true;
-                        boolean drewAce = false;
+                        boolean drewAce     = false;
 
                         while (drawAnother) {
                             if (allCardsQueue.isEmpty()) {
+                                System.out.println("We ran out of cards! Let me shuffle that real quick.");
                                 myDeck.generateAndShuffleDeck();
-
                             }
+
                             PokerDeck.Card cardDrawn = Player.User.drawCard(allCardsQueue);
-                            if (cardDrawn.toString().contains("Ace"))
+
+                            if (cardDrawn.toString().contains("Ace")) {
                                 drewAce = true;
+                                System.out.println(
+                                    "You drew a " + cardDrawn + ", worth either" + cardDrawn.getCardsValue()+" points, or one point /n I'll assign it the first value and discount the remainder in case you go over 21."
+                                );
+                            }
+                            System.out.println("You drew a " + cardDrawn + ", worth " + cardDrawn.getCardsValue()+" points.");
+
                             Player.User.score += cardDrawn.getCardsValue();
+                            System.out.println("That makes for a current score of " + Player.User.score +" points.");
+
                             if (Player.User.score >= 21 && drewAce) {
+                                System.out.println(
+                                        "Your score went over 21, but you drew an Ace, so I'll discount you those extra 13 points."
+                                );
                                 Player.User.score -= 13;
                                 drewAce = false;
                             }
                             if (Player.Computer.score > 21) {
-                                System.out.println("You lost!");
+                                System.out.println("Sorry, you lost!");
                                 computerWon = true;
                                 break;                              //I want to go to the "play again question directly"
                             }                                       //but I'll check how to do that later.
                             else if (Player.Computer.score == 21) {
-                                System.out.println("Blackjack! You won!");
+                                System.out.println("Blackjack! Congrats, you won!");
                                 userWon = true;
                                 break;
                             } else {
