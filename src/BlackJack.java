@@ -46,14 +46,14 @@ public class BlackJack {
                             if (cardDrawn.toString().contains("Ace")) {
                                 drewAce = true;
                                 System.out.println(
-                                    "You drew a " + cardDrawn + ", worth either" + cardDrawn.getCardsValue()+" points, or one point." +
+                                    "You drew a " + cardDrawn + ", worth either " + cardDrawn.getCardsValue()+" points, or one point." +
                                             "\n I'll assign it the first value and discount the remainder in case you go over 21."
                                 );
                             }
-                            System.out.println("You drew a " + cardDrawn + ", worth " + cardDrawn.getCardsValue()+" points.");
+                            else System.out.println("You drew a " + cardDrawn + ", worth " + cardDrawn.getCardsValue()+" points.");
 
                             Player.User.score += cardDrawn.getCardsValue();
-                            System.out.println("That makes for a current score of " + Player.User.score +" points.\n");
+                            System.out.println("Current score of " + Player.User.score +" points.\n");
 
                             if (Player.User.score >= 21 && drewAce) {
                                 System.out.println(
@@ -85,7 +85,7 @@ public class BlackJack {
                         drewAce = false;
 
                         while (drawAnother) {
-                            System.out.println("The computer drew a card.\n");
+                            System.out.println("The computer drew a card.");
                             if (allCardsQueue.isEmpty()) {
                                 myDeck.generateAndShuffleDeck();
                                 System.out.println("The deck ran out of cards, shuffling again.");
@@ -93,7 +93,10 @@ public class BlackJack {
                             PokerDeck.Card cardDrawn = Player.Computer.drawCard(allCardsQueue);
                             if (cardDrawn.toString().contains("Ace"))
                                 drewAce = true;
+
                             Player.Computer.score += cardDrawn.getCardsValue();
+                            System.out.println("Computer's current " + Player.User.score +" points.\n");
+
                             if (Player.Computer.score >= 21 && drewAce) {
                                 Player.Computer.score -= 13;
                                 drewAce = false;
@@ -123,9 +126,10 @@ public class BlackJack {
 
 
             } //while keepDealingCards
-
-            decideAndDisplayWinner(Player.User.score, Player.Computer.score);
-            keepPlaying = keepPlayingQuestion();
+            if (!userWon || !computerWon){
+                decideAndDisplayWinner(Player.User.score, Player.Computer.score);
+                keepPlaying = keepPlayingQuestion();
+            }
 
         }//whole program play again loop
         System.out.println("Okay, thanks for playing! See ya next time (^u^)/ ");
