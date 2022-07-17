@@ -2,6 +2,7 @@ import java.util.*;
 public class BlackJack {
 
     public static void main (String[]args){
+
         boolean keepPlaying = true;
 
         //Making cards and shuffling the deck
@@ -11,19 +12,23 @@ public class BlackJack {
         myDeck.generateAndShuffleDeck();
         Queue<PokerDeck.Card> allCardsQueue = arrayListToQueue(myDeck);
 
+
+
         while (keepPlaying){ //whole program play again loop
-            boolean keepDealingCards = true;
-            boolean userWon          = false;
-            boolean computerWon      = false;
-
-
             //Instantiating players that are going to participate.
             new Player.User();
             new Player.Computer();
             Player.User.score       =0;
             Player.Computer.score   =0;
 
+            boolean keepDealingCards = true;
+            boolean userWon          = false;
+            boolean computerWon      = false;
+
+
             while (keepDealingCards) {
+
+
                 switch (decideTurn()) {
 
                     case 1:  //USER'S TURN---------------------
@@ -72,6 +77,9 @@ public class BlackJack {
                         }
                         Player.User.yetToPlay = false;
                         break;
+
+
+
                     case 2:  //COMPUTER'S TURN-------------------------------------------
                         drawAnother = true;
                         drewAce = false;
@@ -102,19 +110,23 @@ public class BlackJack {
 
                                 drawAnother = Player.Computer.drawAnotherDecision(Player.Computer.score);
                             }
+
                         }
                         Player.Computer.yetToPlay = false;
                         break;
                 } //Switch
 
-                if (userWon || computerWon ||(!Player.User.yetToPlay && !Player.Computer.yetToPlay)) keepDealingCards = false;
+
+
+                if (userWon || computerWon ||(!Player.User.yetToPlay && !Player.Computer.yetToPlay))
+                    keepDealingCards = false;
+
+
             } //while keepDealingCards
 
             decideAndDisplayWinner(Player.User.score, Player.Computer.score);
+            keepPlaying = keepPlayingQuestion();
 
-            keepPlaying = Player.User.yesOrNoQuestion("Do you want to play again?");
-            if (!keepPlaying)
-                keepPlaying= Player.User.yesOrNoQuestion("Are you sure you want to exit the game?");
         }//whole program play again loop
         System.out.println("Okay, thanks for playing! See ya next time (^u^)/ ");
     }//main
@@ -146,6 +158,17 @@ public class BlackJack {
         Player.User.yetToPlay = false;
     }
 */
+    static boolean keepPlayingQuestion(){
+        boolean keepPlaying     = Player.User.yesOrNoQuestion("Do you want to play again?");
+        boolean sure    = false;
+        if (!keepPlaying)
+            sure = Player.User.yesOrNoQuestion("Are you sure you want to exit the game?");
+        if (!sure) {
+            keepPlaying=true;
+            keepPlayingQuestion();
+        }
+        return !keepPlaying;
+    }
     static void decideAndDisplayWinner(int userScore, int computerScore){
         System.out.println("The computer's score was: " + computerScore);
         System.out.println("Your score was: " + userScore);

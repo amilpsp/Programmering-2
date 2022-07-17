@@ -13,7 +13,7 @@ public class Player {
 
     static class User extends Player {
         static int score;
-        static boolean yetToPlay = false;
+        static boolean yetToPlay = true;
 
         /*   static LinkedList<String> playersHand = new LinkedList<>();*/
         static boolean yesOrNoQuestion(String question){ //asks the user if they want to continue.
@@ -50,7 +50,7 @@ public class Player {
 
     static class Computer extends Player {
         static int score;
-        static boolean yetToPlay = false;
+        static boolean yetToPlay = true;
         static boolean drawAnotherDecision(int userScore){
             boolean drawAnother = false;
             if (Computer.score < userScore && Computer.score < 21){
