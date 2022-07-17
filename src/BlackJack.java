@@ -1,5 +1,10 @@
 import java.util.*;
 public class BlackJack {
+    /*
+
+   -------------I want to find a "quick" way to not have this repeat, it's probably obvious and I'm------------------------
+   -----------------------------------overcomplicating my thought process--------------------------------------------------
+   */
     public static void main (String[]args){
 
         boolean continuing = true;
@@ -72,36 +77,26 @@ public class BlackJack {
             continuing = Player.User.yesOrNoQuestion("Do you want to play again?");
         }//whole program play again loop
     }//main
+    static void turn(Player player, Queue<PokerDeck.Card> allCardsQueue,PokerDeck.Deck myDeck) {
 
- /*
+        boolean drawAnother = true;
+        boolean drewAce = false;
 
--------------I want to find a "quick" way to not have this repeat, it's probably obvious and I'm------------------------
------------------------------------overcomplicating my thought process--------------------------------------------------
-
-    static void turn(Player player, Queue<PokerDeck.Card> allCardsQueue,PokerDeck.Deck myDeck){
-
-        boolean drawAnother=true;
-        boolean drewAce=false;
-
-        while(drawAnother) {
-            if (allCardsQueue.isEmpty()){
+        while (drawAnother) {
+            if (allCardsQueue.isEmpty()) {
                 myDeck.generateAndShuffleDeck();
             }
-            PokerDeck.Card cardDrawn =Player.User.drawCard(allCardsQueue);
+            PokerDeck.Card cardDrawn = Player.User.drawCard(allCardsQueue);
             if (cardDrawn.toString().contains("Ace"))
-                drewAce=true;
+                drewAce = true;
             player.score += cardDrawn.getCardsValue();
-            if (player.score >= 21 && drewAce){
+            if (player.score >= 21 && drewAce) {
                 player.score -= 13;
-                drewAce=false;
+                drewAce = false;
             }
             drawAnother = Player.User.yesOrNoQuestion("Do you want to draw another card from the deck?");
         }
-        Player.User.yetToPlay=false;
-    }*/
-    static Queue<PokerDeck.Card> arrayListToQueue(PokerDeck.Deck myDeck){
-        Queue<PokerDeck.Card> allCards = new LinkedList<>(Arrays.asList(myDeck.allCardsArrayList.toArray(new PokerDeck.Card[52])));
-        return allCards;
+        Player.User.yetToPlay = false;
     }
 
     static int decideTurn(){
@@ -114,6 +109,11 @@ public class BlackJack {
             else return 3;
         }
 
+    }
+
+    static Queue<PokerDeck.Card> arrayListToQueue(PokerDeck.Deck myDeck){
+        Queue<PokerDeck.Card> allCards = new LinkedList<>(Arrays.asList(myDeck.allCardsArrayList.toArray(new PokerDeck.Card[52])));
+        return allCards;
     }
 
 }

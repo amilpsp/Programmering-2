@@ -12,7 +12,7 @@ public class Player {
     }
 
     static class User extends Player {
-        static int score;
+        static int score    ;
         static boolean yetToPlay = false;
 
         /*   static LinkedList<String> playersHand = new LinkedList<>();*/
