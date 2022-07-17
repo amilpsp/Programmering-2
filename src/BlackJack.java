@@ -62,12 +62,12 @@ public class BlackJack {
                                 Player.User.score -= 13;
                                 drewAce = false;
                             }
-                            if (Player.User.score > 21) {                   
+                            if (Player.User.score > 21) {
                                 System.out.println("Sorry, you lost!");
                                 computerWon = true;
                                 break;                              //I want to go to the "play again question directly"
                             }                                       //but I'll check how to do that later.
-                            else if (Player.Computer.score == 21) {
+                            else if (Player.User.score == 21) {
                                 System.out.println("Blackjack! Congrats, you won!");
                                 userWon = true;
                                 break;
