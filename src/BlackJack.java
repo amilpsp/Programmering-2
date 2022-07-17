@@ -1,10 +1,6 @@
 import java.util.*;
 public class BlackJack {
-    /*
 
-   -------------I want to find a "quick" way to not have this repeat, it's probably obvious and I'm------------------------
-   -----------------------------------overcomplicating my thought process--------------------------------------------------
-   */
     public static void main (String[]args){
 
         boolean continuing = true;
@@ -17,8 +13,8 @@ public class BlackJack {
         Queue<PokerDeck.Card> allCardsQueue = arrayListToQueue(myDeck);
 
         //Instantiating players that are going to participate.
-        Player.User user = new Player.User();
-        Player.Computer computer = new Player.Computer();
+        new Player.User();
+        new Player.Computer();
 
 
         while (continuing){ //whole program play again loop
@@ -77,6 +73,12 @@ public class BlackJack {
             continuing = Player.User.yesOrNoQuestion("Do you want to play again?");
         }//whole program play again loop
     }//main
+
+    /*
+
+  -------------I want to find a "quick" way to not have this repeat, it's probably obvious and I'm------------------------
+  -----------------------------------overcomplicating my thought process--------------------------------------------------
+
     static void turn(Player player, Queue<PokerDeck.Card> allCardsQueue,PokerDeck.Deck myDeck) {
 
         boolean drawAnother = true;
@@ -98,7 +100,7 @@ public class BlackJack {
         }
         Player.User.yetToPlay = false;
     }
-
+*/
     static int decideTurn(){
 
         if (Player.User.yetToPlay){
@@ -110,6 +112,7 @@ public class BlackJack {
         }
 
     }
+
 
     static Queue<PokerDeck.Card> arrayListToQueue(PokerDeck.Deck myDeck){
         Queue<PokerDeck.Card> allCards = new LinkedList<>(Arrays.asList(myDeck.allCardsArrayList.toArray(new PokerDeck.Card[52])));
