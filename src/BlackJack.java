@@ -173,9 +173,10 @@ public class BlackJack {
         System.out.println("The computer's score was: " + computerScore);
         System.out.println("Your score was: " + userScore);
 
-        if (userScore>computerScore) System.out.println("Congratulations, you won this round!");
-        else if (userScore<computerScore) System.out.println("Sorry, you lost this round :( ");
-        else if (userScore==computerScore) System.out.println("This round was a tie!");
+        // the "scores below 21" shouldn't be necessary, will work around that later.
+        if (userScore>computerScore && userScore<=21) System.out.println("Congratulations, you won this round!");
+        else if (userScore<computerScore && computerScore<=21) System.out.println("Sorry, you lost this round :( ");
+        else if (userScore==computerScore && computerScore<=21) System.out.println("This round was a tie!");
         else System.out.println(
                 "Sorry, there was a problem comparing the score, please contact the developer to inform them of the bug!");
     }
