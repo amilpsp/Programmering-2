@@ -32,6 +32,7 @@ public class BlackJack {
                         while (drawAnother) {
                             if (allCardsQueue.isEmpty()) {
                                 myDeck.generateAndShuffleDeck();
+
                             }
                             PokerDeck.Card cardDrawn = Player.User.drawCard(allCardsQueue);
                             if (cardDrawn.toString().contains("Ace"))
@@ -94,7 +95,7 @@ public class BlackJack {
                 if (userWon || computerWon ||(!Player.User.yetToPlay && !Player.Computer.yetToPlay)) keepDealingCards = false;
             } //while keepDealingCards
 
-
+            decideAndDisplayWinner(Player.User.score, Player.Computer.score);
 
             keepPlaying = Player.User.yesOrNoQuestion("Do you want to play again?");
         }//whole program play again loop
@@ -128,16 +129,14 @@ public class BlackJack {
     }
 */
     static void decideAndDisplayWinner(int userScore, int computerScore){
-        System.out.println("The computer's score was");
-        System.out.println("");
+        System.out.println("The computer's score was: " + computerScore);
+        System.out.println("Your score was: " + userScore);
 
-        if (userScore>computerScore){
-            System.out.println("");
-        }
-
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
+        if (userScore>computerScore) System.out.println("Congratulations, you won this round!");
+        else if (userScore<computerScore) System.out.println("Sorry, you lost this round :( ");
+        else if (userScore==computerScore) System.out.println("This round was a tie!");
+        else System.out.println(
+                "Sorry, there was a problem comparing the score, please contact the developer to inform them of the bug!");
     }
     static int decideTurn(){
         if (Player.User.yetToPlay)return 1;

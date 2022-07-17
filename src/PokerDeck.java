@@ -19,6 +19,7 @@ public class PokerDeck {
         public void generateAndShuffleDeck(){
             generateCards();
             Collections.shuffle(this.allCardsArrayList);
+            System.out.println("...[Shuffles the deck in Spanish]...");
         }
 
     }
