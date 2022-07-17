@@ -128,9 +128,9 @@ public class BlackJack {
             } //while keepDealingCards
             if (!userWon || !computerWon){
                 decideAndDisplayWinner(Player.User.score, Player.Computer.score);
-                keepPlaying = keepPlayingQuestion();
             }
 
+            keepPlaying = keepPlayingQuestion();
         }//whole program play again loop
         System.out.println("Okay, thanks for playing! See ya next time (^u^)/ ");
     }//main
