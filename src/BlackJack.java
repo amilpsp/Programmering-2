@@ -124,8 +124,8 @@ public class BlackJack {
                 if (userWon || computerWon ||(!Player.User.yetToPlay && !Player.Computer.yetToPlay))
                     keepDealingCards = false;
 
-
             } //while keepDealingCards
+
             if (!userWon || !computerWon){
                 decideAndDisplayWinner(Player.User.score, Player.Computer.score);
             }
@@ -171,7 +171,9 @@ public class BlackJack {
             keepPlaying=true;
             keepPlayingQuestion();
         }
-        return !keepPlaying;
+        else keepPlaying=false;
+        
+        return keepPlaying;
     }
     static void decideAndDisplayWinner(int userScore, int computerScore){
         System.out.println("The computer's score was: " + computerScore);
