@@ -18,10 +18,11 @@ public class BlackJack {
 
 
         while (continuing){ //whole program play again loop
+            boolean userWon=false;
 
-            switch(decideTurn()){
+            switch(decideTurn(userWon)){
 
-                case 1:
+                case 1:  //USER'S TURN---------------------
                     boolean drawAnother=true;
                     boolean drewAce=false;
 
@@ -37,11 +38,22 @@ public class BlackJack {
                             Player.User.score -= 13;
                             drewAce=false;
                         }
-                        drawAnother = Player.User.yesOrNoQuestion("Do you want to draw another card from the deck?");
+                        if (Player.Computer.score > 21){
+                            System.out.println("You lost!");
+                            break;                              //I want to go to the "play again question directly"
+                        }                                       //but I'll check how to do that later.
+                        else if (Player.Computer.score ==21){
+                            System.out.println("Blackjack! You won!");
+                            userWon=true;
+                            break;
+                        }
+                        else {
+                            drawAnother = Player.User.yesOrNoQuestion("Do you want to draw another card from the deck?");
+                        }
                     }
                     Player.User.yetToPlay=false;
                     break;
-                case 2:
+                case 2:  //COMPUTER'S TURN-------------------------------------------
                     drawAnother=true;
                     drewAce = false;
 
@@ -57,11 +69,23 @@ public class BlackJack {
                             Player.Computer.score -= 13;
                             drewAce=false;
                         }
-                        drawAnother = Player.Computer.drawAnotherDecision(Player.Computer.score);
+                        if (Player.Computer.score > 21){
+                            System.out.println("You won!");
+                            break;                              //I want to go to the "play again question directly"
+                        }                                       //but I'll check how to do that later.
+                        else if (Player.Computer.score ==21){
+                            System.out.println("Blackjack!");
+                            break;
+                        }
+                        else {
+                            drawAnother = Player.Computer.drawAnotherDecision(Player.Computer.score);
+                        }
                     }
                     Player.Computer.yetToPlay=false;
                     break;
                 case 3:
+                    //I want to go to the "play again question directly"
+                    //but I'll check how to do that later.
                     break;
             }
 
@@ -101,16 +125,11 @@ public class BlackJack {
         Player.User.yetToPlay = false;
     }
 */
-    static int decideTurn(){
-
-        if (Player.User.yetToPlay){
-            return 1;
-        }
-        else{
-            if (Player.Computer.yetToPlay)return 2;
-            else return 3;
-        }
-
+    static int decideTurn(boolean userWon){
+        if (Player.User.yetToPlay)return 1;
+        else if ( !userWon && Player.Computer.yetToPlay)return 2;
+        else if (userWon)return 3;
+        else return 4;
     }
 
 
