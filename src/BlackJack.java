@@ -3,7 +3,10 @@ public class BlackJack {
 
     public static void main (String[]args){
 
-        boolean continuing = true;
+        boolean keepPlaying = true;
+        boolean keepDealingCards = true;
+        boolean userWon=false;
+        boolean computerWon=false;
 
         //Making cards and shuffling the deck
         new PokerDeck();
@@ -17,84 +20,78 @@ public class BlackJack {
         new Player.Computer();
 
 
-        while (continuing){ //whole program play again loop
-            boolean userWon=false;
+        while (keepPlaying){ //whole program play again loop
+            while (keepDealingCards) {
+                switch (decideTurn()) {
 
-            switch(decideTurn(userWon)){
+                    case 1:  //USER'S TURN---------------------
+                        boolean drawAnother = true;
+                        boolean drewAce = false;
 
-                case 1:  //USER'S TURN---------------------
-                    boolean drawAnother=true;
-                    boolean drewAce=false;
-
-                    while(drawAnother) {
-                        if (allCardsQueue.isEmpty()){
-                            myDeck.generateAndShuffleDeck();
+                        while (drawAnother) {
+                            if (allCardsQueue.isEmpty()) {
+                                myDeck.generateAndShuffleDeck();
+                            }
+                            PokerDeck.Card cardDrawn = Player.User.drawCard(allCardsQueue);
+                            if (cardDrawn.toString().contains("Ace"))
+                                drewAce = true;
+                            Player.User.score += cardDrawn.getCardsValue();
+                            if (Player.User.score >= 21 && drewAce) {
+                                Player.User.score -= 13;
+                                drewAce = false;
+                            }
+                            if (Player.Computer.score > 21) {
+                                System.out.println("You lost!");
+                                computerWon = true;
+                                break;                              //I want to go to the "play again question directly"
+                            }                                       //but I'll check how to do that later.
+                            else if (Player.Computer.score == 21) {
+                                System.out.println("Blackjack! You won!");
+                                userWon = true;
+                                break;
+                            } else {
+                                drawAnother = Player.User.yesOrNoQuestion("Do you want to draw another card from the deck?");
+                            }
                         }
-                        PokerDeck.Card cardDrawn =Player.User.drawCard(allCardsQueue);
-                        if (cardDrawn.toString().contains("Ace"))
-                            drewAce=true;
-                        Player.User.score += cardDrawn.getCardsValue();
-                        if (Player.User.score >= 21 && drewAce){
-                            Player.User.score -= 13;
-                            drewAce=false;
-                        }
-                        if (Player.Computer.score > 21){
-                            System.out.println("You lost!");
-                            break;                              //I want to go to the "play again question directly"
-                        }                                       //but I'll check how to do that later.
-                        else if (Player.Computer.score ==21){
-                            System.out.println("Blackjack! You won!");
-                            userWon=true;
-                            break;
-                        }
-                        else {
-                            drawAnother = Player.User.yesOrNoQuestion("Do you want to draw another card from the deck?");
-                        }
-                    }
-                    Player.User.yetToPlay=false;
-                    break;
-                case 2:  //COMPUTER'S TURN-------------------------------------------
-                    drawAnother=true;
-                    drewAce = false;
+                        Player.User.yetToPlay = false;
+                        break;
+                    case 2:  //COMPUTER'S TURN-------------------------------------------
+                        drawAnother = true;
+                        drewAce = false;
 
-                    while(drawAnother) {
-                        if (allCardsQueue.isEmpty()){
-                            myDeck.generateAndShuffleDeck();
+                        while (drawAnother) {
+                            if (allCardsQueue.isEmpty()) {
+                                myDeck.generateAndShuffleDeck();
+                            }
+                            PokerDeck.Card cardDrawn = Player.Computer.drawCard(allCardsQueue);
+                            if (cardDrawn.toString().contains("Ace"))
+                                drewAce = true;
+                            Player.Computer.score += cardDrawn.getCardsValue();
+                            if (Player.Computer.score >= 21 && drewAce) {
+                                Player.Computer.score -= 13;
+                                drewAce = false;
+                            }
+                            if (Player.Computer.score > 21) {
+                                System.out.println("You won!");
+                                userWon = true;
+                                break;                              //I want to go to the "play again question directly"
+                            }                                       //but I'll check how to do that later.
+                            else if (Player.Computer.score == 21) {
+                                System.out.println("Blackjack!");
+                                break;
+                            } else {
+                                drawAnother = Player.Computer.drawAnotherDecision(Player.Computer.score);
+                            }
                         }
-                        PokerDeck.Card cardDrawn =Player.Computer.drawCard(allCardsQueue);
-                        if (cardDrawn.toString().contains("Ace"))
-                            drewAce=true;
-                        Player.Computer.score += cardDrawn.getCardsValue();
-                        if (Player.Computer.score >= 21 && drewAce){
-                            Player.Computer.score -= 13;
-                            drewAce=false;
-                        }
-                        if (Player.Computer.score > 21){
-                            System.out.println("You won!");
-                            break;                              //I want to go to the "play again question directly"
-                        }                                       //but I'll check how to do that later.
-                        else if (Player.Computer.score ==21){
-                            System.out.println("Blackjack!");
-                            break;
-                        }
-                        else {
-                            drawAnother = Player.Computer.drawAnotherDecision(Player.Computer.score);
-                        }
-                    }
-                    Player.Computer.yetToPlay=false;
-                    break;
-                case 3:
-                    //I want to go to the "play again question directly"
-                    //but I'll check how to do that later.
-                    break;
-            }
+                        Player.Computer.yetToPlay = false;
+                        break;
+                } //Switch
+
+                if (userWon || computerWon ||(!Player.User.yetToPlay && !Player.Computer.yetToPlay)) keepDealingCards = false;
+            } //while keepDealingCards
 
 
-
-
-            System.out.println();
-
-            continuing = Player.User.yesOrNoQuestion("Do you want to play again?");
+            keepPlaying = Player.User.yesOrNoQuestion("Do you want to play again?");
         }//whole program play again loop
     }//main
 
@@ -125,12 +122,10 @@ public class BlackJack {
         Player.User.yetToPlay = false;
     }
 */
-    static int decideTurn(boolean userWon){
+    static int decideTurn(){
         if (Player.User.yetToPlay)return 1;
-        else if ( !userWon && Player.Computer.yetToPlay)return 2;
-        else if (userWon)return 3;
-        else return 4;
-    }
+        else return 2;
+        }
 
 
     static Queue<PokerDeck.Card> arrayListToQueue(PokerDeck.Deck myDeck){
@@ -139,4 +134,3 @@ public class BlackJack {
     }
 
 }
-
