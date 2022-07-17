@@ -22,12 +22,12 @@ public class BlackJack {
             Player.Computer.score   =0;
 
             boolean keepDealingCards = true;
-            boolean userWon          = false;
-            boolean computerWon      = false;
 
 
             while (keepDealingCards) {
 
+                boolean userWon          = false;
+                boolean computerWon      = false;
 
                 switch (decideTurn()) {
 
@@ -95,7 +95,7 @@ public class BlackJack {
                                 drewAce = true;
 
                             Player.Computer.score += cardDrawn.getCardsValue();
-                            System.out.println("Computer's current " + Player.Computer.score +" points.\n");
+                            System.out.println("Computer's current " + Player.Computer.score +" points.");
 
                             if (Player.Computer.score >= 21 && drewAce) {
                                 Player.Computer.score -= 13;
@@ -111,7 +111,7 @@ public class BlackJack {
                                 break;
                             } else {
 
-                                drawAnother = Player.Computer.drawAnotherDecision(Player.Computer.score);
+                                drawAnother = Player.Computer.drawAnotherDecision(Player.Computer.score, userWon);
                             }
 
                         }
@@ -124,11 +124,10 @@ public class BlackJack {
                 if (userWon || computerWon ||(!Player.User.yetToPlay && !Player.Computer.yetToPlay))
                     keepDealingCards = false;
 
+                if (!userWon || !computerWon){
+                    decideAndDisplayWinner(Player.User.score, Player.Computer.score);
+                }
             } //while keepDealingCards
-
-            if (!userWon || !computerWon){
-                decideAndDisplayWinner(Player.User.score, Player.Computer.score);
-            }
 
             keepPlaying = keepPlayingQuestion();
         }//whole program play again loop
@@ -180,11 +179,16 @@ public class BlackJack {
         System.out.println("Your score was: " + userScore);
 
         // the "scores below 21" shouldn't be necessary, will work around that later.
-        if (userScore>computerScore && userScore<=21) System.out.println("Congratulations, you won this round!");
-        else if (userScore<computerScore && computerScore<=21) System.out.println("Sorry, you lost this round :( ");
-        else if (userScore==computerScore && computerScore<=21) System.out.println("This round was a tie!");
-        else System.out.println(
-                "Sorry, there was a problem comparing the score, please contact the developer to inform them of the bug!");
+        try {
+            if (userScore > computerScore && userScore <= 21)
+                System.out.println("Congratulations, you won this round!");
+            else if (userScore < computerScore && computerScore <= 21)
+                System.out.println("Sorry, you lost this round :( ");
+            else if (userScore == computerScore && computerScore <= 21) System.out.println("This round was a tie!");
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
     }
     static int decideTurn(){
         if (Player.User.yetToPlay)return 1;

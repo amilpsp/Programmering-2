@@ -52,13 +52,13 @@ public class Player {
         static int score;
         static boolean yetToPlay = true;
         static boolean drawAnother = true;
-        static boolean drawAnotherDecision(int userScore){
+        static boolean drawAnotherDecision(int userScore, boolean userWon){
 
-
-            if (Computer.score < userScore && Computer.score < 21){
+            if (Computer.score < userScore && userWon == false ){
                 drawAnother = true;
                 yetToPlay=true;
             }
+
             return drawAnother;
         }
 
