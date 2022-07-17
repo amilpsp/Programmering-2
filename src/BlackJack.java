@@ -53,7 +53,7 @@ public class BlackJack {
                             System.out.println("You drew a " + cardDrawn + ", worth " + cardDrawn.getCardsValue()+" points.");
 
                             Player.User.score += cardDrawn.getCardsValue();
-                            System.out.println("That makes for a current score of " + Player.User.score +" points.");
+                            System.out.println("That makes for a current score of " + Player.User.score +" points.\n");
 
                             if (Player.User.score >= 21 && drewAce) {
                                 System.out.println(
@@ -62,7 +62,7 @@ public class BlackJack {
                                 Player.User.score -= 13;
                                 drewAce = false;
                             }
-                            if (Player.Computer.score > 21) {
+                            if (Player.Computer.score > 21) {                   //THIS DIDN'T WORK, DEBUG LATER.
                                 System.out.println("Sorry, you lost!");
                                 computerWon = true;
                                 break;                              //I want to go to the "play again question directly"
@@ -85,7 +85,7 @@ public class BlackJack {
                         drewAce = false;
 
                         while (drawAnother) {
-                            System.out.println("The computer drew another card.");
+                            System.out.println("The computer drew a card.\n");
                             if (allCardsQueue.isEmpty()) {
                                 myDeck.generateAndShuffleDeck();
                                 System.out.println("The deck ran out of cards, shuffling again.");
