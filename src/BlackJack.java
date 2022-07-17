@@ -95,7 +95,7 @@ public class BlackJack {
                                 drewAce = true;
 
                             Player.Computer.score += cardDrawn.getCardsValue();
-                            System.out.println("Computer's current " + Player.User.score +" points.\n");
+                            System.out.println("Computer's current " + Player.Computer.score +" points.\n");
 
                             if (Player.Computer.score >= 21 && drewAce) {
                                 Player.Computer.score -= 13;
@@ -172,7 +172,7 @@ public class BlackJack {
             keepPlayingQuestion();
         }
         else keepPlaying=false;
-        
+
         return keepPlaying;
     }
     static void decideAndDisplayWinner(int userScore, int computerScore){
