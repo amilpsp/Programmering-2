@@ -36,6 +36,7 @@ public class BlackJack {
                         boolean drewAce     = false;
 
                         while (drawAnother) {
+
                             if (allCardsQueue.isEmpty()) {
                                 System.out.println("We ran out of cards! Let me shuffle that real quick.");
                                 myDeck.generateAndShuffleDeck();
@@ -137,8 +138,9 @@ public class BlackJack {
 
     /*
 
-  -------------I want to find a "quick" way to not have this repeat, it's probably obvious and I'm------------------------
-  -----------------------------------overcomplicating my thought process--------------------------------------------------
+-------------I want to find a "quick" way to not have the code inside the "while (drawAnother)" loop repeat,------------
+------------------------although it's probably obvious, and I'm overcomplicating my thought process.--------------------
+--------------------------------------Again, I procrastinated and fell short on time hahah------------------------------
 
     static void turn(Player player, Queue<PokerDeck.Card> allCardsQueue,PokerDeck.Deck myDeck) {
 
@@ -163,6 +165,10 @@ public class BlackJack {
     }
 */
     static boolean keepPlayingQuestion(){
+
+        /*Recursive method so that the user doesn't have to open the program again in case they
+         responded wrong the first time, or they suddenly change their mind. */
+
         boolean keepPlaying     = Player.User.yesOrNoQuestion("Do you want to play again?");
         boolean sure    = false;
         if (!keepPlaying)
@@ -177,7 +183,8 @@ public class BlackJack {
         System.out.println("The computer's score was: " + computerScore);
         System.out.println("Your score was: " + userScore);
 
-        // the "scores below 21" shouldn't be necessary, will work around that later.
+        /* the "scores below 21" shouldn't be necessary, but there was a bug here and this is the fastest way that
+        came to mind to fix it before turning in this homework, will work around that later.*/
         try {
             if (userScore > computerScore && userScore <= 21)
                 System.out.println("Congratulations, you won this round!");
@@ -194,8 +201,11 @@ public class BlackJack {
         else return 2;
         }
 
-
     static Queue<PokerDeck.Card> arrayListToQueue(){
+
+        /*Used this data structure it's FIFO principle, that reminded me of how an actual deck of cards tends to work;
+        * specially if the cards that get used in a game are re-inserted at the end of the deck.*/
+
         Queue<PokerDeck.Card> allCards = new LinkedList<>(Arrays.asList(PokerDeck.Deck.allCardsArrayList.toArray(new PokerDeck.Card[52])));
         return allCards;
     }
