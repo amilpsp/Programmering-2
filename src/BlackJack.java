@@ -27,7 +27,9 @@ public class BlackJack {
 
             while (keepDealingCards) {
 
-                boolean userWon          = false; //This was so that the program wouldn't go to counting if
+                boolean userWon          = false;
+                /*This was so that the program didn't go through with the computer's turn
+                nor the counting if the user got a blackjack during counting*/
 
                 switch (decideTurn()) {
 
@@ -66,7 +68,6 @@ public class BlackJack {
                             }
                             if (Player.User.score > 21) {
                                 System.out.println("Sorry, you lost!");
-                                computerWon = true;
                                 break;                              //I want to go to the "play again question directly"
                             }                                       //but I'll check how to do that later.
                             else if (Player.User.score == 21) {
