@@ -7,7 +7,7 @@ public class PokerDeck {
     static class Deck extends PokerDeck {
         static List<Card> allCardsArrayList = new ArrayList<>();
 
-        public void generateCards(){
+        private void generateCards(){
 
             //for each suit
             for(int s=0; s < 4; s++){
