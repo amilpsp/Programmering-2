@@ -15,7 +15,6 @@ public class Player {
         static int score;
         static boolean yetToPlay = true;
 
-        /*   static LinkedList<String> playersHand = new LinkedList<>();*/
         static boolean yesOrNoQuestion(String question){ //asks the user if they want to continue.
             char answer = 0;
             boolean validInput = false;
@@ -43,9 +42,7 @@ public class Player {
             }
             return answer != 'N';
         }
-    /*static List<String> getPlayersHand(){
-         return playersHand;
-     }*/
+    
     }
 
     static class Computer extends Player {
