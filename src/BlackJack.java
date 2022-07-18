@@ -207,7 +207,13 @@ public class BlackJack {
         /*Used this data structure it's FIFO principle, that reminded me of how an actual deck of cards tends to work;
         * specially if the cards that get used in a game are re-inserted at the end of the deck.*/
 
-        Queue<PokerDeck.Card> allCards = new LinkedList<>(Arrays.asList(PokerDeck.Deck.allCardsArrayList.toArray(new PokerDeck.Card[52])));
+        Queue<PokerDeck.Card> allCards =
+                new LinkedList<>(
+                        Arrays.asList(
+                                PokerDeck.Deck.allCardsArrayList.toArray(new PokerDeck.Card[52])
+                        )
+                );
+
         return allCards;
     }
 

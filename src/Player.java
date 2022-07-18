@@ -54,13 +54,14 @@ public class Player {
         static boolean drawAnother = true;
         static boolean drawAnotherDecision(int userScore, boolean userWon){
 
-            if (Computer.score < userScore && userWon == false ){
-                 /* ^ I know that this statement above can be simplified, but I had it like this for
-                 my own ease of reading */
+            if (Computer.score < userScore && userWon == false){
+
+                /* ^ I know that this statement above can be simplified, but I had it like this for
+                my own ease of reading */
+
                 drawAnother = true;
                 yetToPlay=true;
             }
-
             return drawAnother;
         }
 
