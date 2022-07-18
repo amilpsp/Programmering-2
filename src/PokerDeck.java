@@ -3,7 +3,7 @@ public class PokerDeck {
     static class Deck extends PokerDeck {
         static List<Card> allCardsArrayList = new ArrayList<>();
 
-        public ArrayList<Card> generateCards(){
+        public void generateCards(){
 
             //for each suit
             for(int s=0; s < 4; s++){
@@ -12,7 +12,6 @@ public class PokerDeck {
                     allCardsArrayList.add(new Card(Color.values()[s],n));
                 }
             }
-            return (ArrayList<Card>) allCardsArrayList;
         }
 
         public void generateAndShuffleDeck(){
