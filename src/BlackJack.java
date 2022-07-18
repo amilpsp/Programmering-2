@@ -191,7 +191,9 @@ public class BlackJack {
                 System.out.println("Congratulations, you won this round!");
             else if (userScore < computerScore && computerScore <= 21)
                 System.out.println("Sorry, you lost this round :( ");
-            else if (userScore == computerScore && computerScore <= 21) System.out.println("This round was a tie!");
+            else if (
+                    userScore == computerScore && computerScore <= 21) System.out.println("This round was a tie!"
+                );
         }
         catch (Exception e){
             System.out.println(e);
@@ -217,4 +219,4 @@ public class BlackJack {
         return allCards;
     }
 
-}
+}   
