@@ -42,7 +42,7 @@ public class Player {
             }
             return answer != 'N';
         }
-    
+
     }
 
     static class Computer extends Player {

@@ -57,9 +57,10 @@ public class BlackJack {
 
                             if (Player.User.score >= 21 && drewAce) {
                                 System.out.println(
-                                        "Your score went over 21, but you drew an Ace, so I'll discount you those extra 13 points."
+                                        "Your score went over 21, but you drew an Ace, so I'll discount you those extra 13 points. \n"
                                 );
                                 Player.User.score -= 13;
+                                System.out.println("Current score of " + Player.User.score +" points.\n");
                                 drewAce = false;
                             }
                             if (Player.User.score > 21) {
@@ -197,7 +198,7 @@ public class BlackJack {
 
 
     static Queue<PokerDeck.Card> arrayListToQueue(PokerDeck.Deck myDeck){
-        Queue<PokerDeck.Card> allCards = new LinkedList<>(Arrays.asList(myDeck.allCardsArrayList.toArray(new PokerDeck.Card[52])));
+        Queue<PokerDeck.Card> allCards = new LinkedList<>(Arrays.asList(PokerDeck.Deck.allCardsArrayList.toArray(new PokerDeck.Card[52])));
         return allCards;
     }
 
