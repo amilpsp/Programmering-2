@@ -2,8 +2,11 @@ import java.util.Queue;
 import java.util.Scanner;
 
 public class Player {
-    static boolean yetToPlay = false;
-    public int score;
+
+    /* Made two different kinds of players because I wanted to make the turn() function take the kind of player,
+    because the only difference in the turns is the decision-making on whether the Player is going to
+    draw another card or not. In the end I didn't succeed at making the function yet, but that is something that
+    I intend to better in the next version. */
 
     static PokerDeck.Card drawCard(Queue<PokerDeck.Card> allCardsQueue){
         PokerDeck.Card cardDrawn = allCardsQueue.remove(); //drawing a card
@@ -27,7 +30,7 @@ public class Player {
                     if (answer == 'Y' || answer == 'N') {
                         validInput = true;
                         if (answer == 'N'){     // These 3 lines were the only
-                            /*why are these here?*/     yetToPlay = true;   // new additions to the old
+                            yetToPlay = true;   // new additions to the old
                         }                       // code from last course
                     }
                     else {
@@ -52,6 +55,8 @@ public class Player {
         static boolean drawAnotherDecision(int userScore, boolean userWon){
 
             if (Computer.score < userScore && userWon == false ){
+                // ^ I know that this statement above can be simplified, but I had it like this for
+                // my own ease of reading */
                 drawAnother = true;
                 yetToPlay=true;
             }

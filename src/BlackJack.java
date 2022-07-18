@@ -8,13 +8,13 @@ public class BlackJack {
         //Making cards and shuffling the deck
         new PokerDeck();
         PokerDeck.Deck myDeck = new PokerDeck.Deck();
-        //Note to self:                                 REMEMBER TO CHECK WHEN THIS IS NEEDED AGAIN.
-        myDeck.generateAndShuffleDeck();
-        Queue<PokerDeck.Card> allCardsQueue = arrayListToQueue(myDeck);
+                myDeck.generateAndShuffleDeck();
+        Queue<PokerDeck.Card> allCardsQueue = arrayListToQueue();
 
 
 
         while (keepPlaying){ //whole program play again loop
+
             //Instantiating players that are going to participate.
             new Player.User();
             new Player.Computer();
@@ -171,8 +171,6 @@ public class BlackJack {
             keepPlaying=true;
             keepPlayingQuestion();
         }
-        else keepPlaying=false;
-
         return keepPlaying;
     }
     static void decideAndDisplayWinner(int userScore, int computerScore){
@@ -197,7 +195,7 @@ public class BlackJack {
         }
 
 
-    static Queue<PokerDeck.Card> arrayListToQueue(PokerDeck.Deck myDeck){
+    static Queue<PokerDeck.Card> arrayListToQueue(){
         Queue<PokerDeck.Card> allCards = new LinkedList<>(Arrays.asList(PokerDeck.Deck.allCardsArrayList.toArray(new PokerDeck.Card[52])));
         return allCards;
     }
