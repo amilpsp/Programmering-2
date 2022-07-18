@@ -22,12 +22,12 @@ public class BlackJack {
             Player.Computer.score   =0;
 
             boolean keepDealingCards = true;
+            // so that it loops through that process as long as one of the players has yet to play.
 
 
             while (keepDealingCards) {
 
-                boolean userWon          = false;
-                boolean computerWon      = false;
+                boolean userWon          = false; //This was so that the program wouldn't go to counting if
 
                 switch (decideTurn()) {
 
@@ -123,10 +123,10 @@ public class BlackJack {
 
 
 
-                if (userWon || computerWon ||(!Player.User.yetToPlay && !Player.Computer.yetToPlay))
+                if (userWon ||(!Player.User.yetToPlay && !Player.Computer.yetToPlay))
                     keepDealingCards = false;
 
-                if (!userWon || !computerWon){
+                if (!userWon){
                     decideAndDisplayWinner(Player.User.score, Player.Computer.score);
                 }
             } //while keepDealingCards
