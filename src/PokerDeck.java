@@ -16,7 +16,7 @@ public class PokerDeck {
 
         public void generateAndShuffleDeck(){
             generateCards();
-            Collections.shuffle(this.allCardsArrayList);
+            Collections.shuffle(allCardsArrayList);
             System.out.println("...[Shuffles the deck in Spanish]...");
         }
 
@@ -29,8 +29,8 @@ public class PokerDeck {
     }
 
     class Card extends Deck {
-        private int cardsValue;
-        private Color cardsColor;
+        final private int cardsValue;
+        final private Color cardsColor;
 
         public Card(Color aColor, int aValue){  //Card constructor
             this.cardsColor = aColor;
@@ -39,9 +39,7 @@ public class PokerDeck {
         public int getCardsValue(){
             return cardsValue;
         }
-        public Color getCardsColor(){
-            return cardsColor;
-        }
+
         public String toString(){
             String valueToString = null;
 
